@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <ExampleComponent/>
+    <Estacionamiento/>
   </div>
 </template>
 
 <script>
-import ExampleComponent from './components/ExampleComponent'
-
+/* eslint-disable */
+import Estacionamiento from './components/Estacionamiento.vue'
 export default {
   name: 'App',
   components: {
-    ExampleComponent
+    Estacionamiento
   }
 }
 </script>
