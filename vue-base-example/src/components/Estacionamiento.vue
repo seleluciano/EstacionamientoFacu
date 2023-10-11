@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Sensores</h1>
+        <h1>ESTACIONAMIENTO</h1>
         <ul>
             <li v-for="sensor in sensores" :key="sensor.id">{{ sensor.nombre }}</li>
         </ul>
@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-
+/* eslint-disable */ 
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -18,17 +18,16 @@ export default {
         };
     },
     mounted() {
-         axios.get('http://localhost:8000/api/sensores/')
+        axios.get('http://localhost:8000/api/sensores/')
             .then(response => {
                 this.sensores = response.data;
             })
             .catch(error => {
                 console.error(error);
-            });
+            })
     }
-};
+}
 </script>
-
 <style>
 * {
     margin: 0;
@@ -42,12 +41,12 @@ body {
     height: 80%;
 }
 
-p {
+p,h1 {
     color: black;
     font-family: cursive;
 }
 
 input {
-    background-color: rgb(39, 84, 231);
+    background-color: rgb(10, 64, 240);
 }
 </style>
