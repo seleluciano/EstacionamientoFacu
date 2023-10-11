@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Sensor(models.Model):
-    ubicacion = models.CharField(max_length=200)
+    numero = models.CharField(max_length=200)
     estado = models.BooleanField(default=False)
 
 class Cliente(models.Model):

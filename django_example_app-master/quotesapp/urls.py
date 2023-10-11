@@ -15,10 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from quotes.views import main
+from ..quotes.views import ClienteViewSet, SensorViewSet
+from rest_framework.routers import DefaultRouter
 
+
+router = DefaultRouter()
+router.register(r'clientes', ClienteViewSet)
+router.register(r'sensores', SensorViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('main/', main),
+    path('main/', main)
 ]

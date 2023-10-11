@@ -9,20 +9,18 @@
                 border: 1px solid;
             }
         </style>
-        <h1>Items</h1>
+        <h1>Estacionamiento</h1>
 
         <table>
             <tr>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Proveedor</th>
+                <th>Numero de sensor</th>
+                <th>Estado</th>
             </tr>
             {% for item in items %}
                 <tr>
-                    <td>{{item.name}}</td>
-                    <td>{{item.price}}</td>
-                    <td>{{item.provider.name}}</td>
-                </tr>    
+                    <td>{{Sensor.ubicacion}}</td>
+                    <td>{{Sensor.estado}}</td>
+                 </tr>    
             
             {% endfor %}
         

@@ -1,25 +1,34 @@
 <template>
     <div>
-        
+        <h1>Sensores</h1>
+        <ul>
+            <li v-for="sensor in sensores" :key="sensor.id">{{ sensor.nombre }}</li>
+        </ul>
     </div>
 </template>
 
 <script>
-/* eslint-disable */
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
-    name: 'APITest',
-    data: function () {
+    data() {
         return {
-            
-        }
+            clientes: [],
+            sensores: []
+        };
     },
-    methods: {
-        
-    }  
-}
+    mounted() {
+         axios.get('http://localhost:8000/api/sensores/')
+            .then(response => {
+                this.sensores = response.data;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+};
 </script>
+
 <style>
 * {
     margin: 0;
@@ -39,5 +48,6 @@ p {
 }
 
 input {
-    background-color: rgb(128, 156, 247);
-}</style>
+    background-color: rgb(39, 84, 231);
+}
+</style>

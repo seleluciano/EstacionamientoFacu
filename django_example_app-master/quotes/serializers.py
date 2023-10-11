@@ -4,10 +4,10 @@ from .models import Sensor, Cliente
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        fields = '__all__'
+        fields = ['nombre','apellido','DNI','telefono']
 
 class  SensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
-        fields = '__all__'
+        fields = ['numero','estado']
 
