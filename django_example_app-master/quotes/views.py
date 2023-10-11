@@ -21,4 +21,3 @@ class SensorViewSet(viewsets.ModelViewSet):
     serializer_class = SensorSerializer
     authentication_classes = []
     permission_classes = []
-

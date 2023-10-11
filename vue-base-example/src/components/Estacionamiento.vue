@@ -2,29 +2,41 @@
     <div>
         <h1>ESTACIONAMIENTO</h1>
         <ul>
-            <li v-for="sensor in sensores" :key="sensor.id">{{ sensor.nombre }}</li>
+            <li>Id</li>         <li>Estado</li>
+            <ul v-for="Sensor in sensores" :key="Sensor.id">
+                <li>{{ Sensor.id }}</li>
+                <li>{{ Sensor.estado }}</li>
+            </ul>
         </ul>
     </div>
 </template>
 
 <script>
-/* eslint-disable */ 
+/* eslint-disable */
 import axios from 'axios'
+
 export default {
-    data() {
+    name: 'APITest',
+    data: function () {
         return {
-            clientes: [],
-            sensores: []
-        };
+            sensores: [],
+            estado: ''
+        }
+    },
+    methods: {
+        cargarDatos() {
+            axios.get('http://localhost:8080')
+                .then(response => {
+                    this.sensores = response.data
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        },
     },
     mounted() {
-        axios.get('http://localhost:8000/api/sensores/')
-            .then(response => {
-                this.sensores = response.data;
-            })
-            .catch(error => {
-                console.error(error);
-            })
+        this.cargarDatos()
     }
 }
 </script>
@@ -36,17 +48,18 @@ export default {
 }
 
 body {
-    background-color: aquamarine;
+    background-color: rgb(31, 49, 209);
     width: 100%;
     height: 80%;
 }
 
-p,h1 {
+p,
+h1,ul{
     color: black;
     font-family: cursive;
 }
 
-input {
-    background-color: rgb(10, 64, 240);
+input{
+    background-color: rgb(202, 208, 228);
 }
 </style>

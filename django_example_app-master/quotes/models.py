@@ -2,7 +2,6 @@ from django.db import models
 
 
 class Sensor(models.Model):
-    numero = models.IntegerField()
     estado = models.BooleanField(default=False)
 
 class Cliente(models.Model):

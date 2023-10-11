@@ -9,5 +9,5 @@ class ClienteSerializer(serializers.ModelSerializer):
 class  SensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
-        fields = ['numero','estado']
+        fields = ['id','estado']
 
