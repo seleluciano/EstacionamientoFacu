@@ -9,13 +9,16 @@ def main(request):
     return render(request, 'quotes/main.html')
 
 
-
-
 class ClienteViewSet(viewsets.ModelViewSet):
     queryset = Cliente.objects.all()
     serializer_class = ClienteSerializer
+    authentication_classes = []
+    permission_classes = []
+
 
 class SensorViewSet(viewsets.ModelViewSet):
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
+    authentication_classes = []
+    permission_classes = []
 
