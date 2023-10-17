@@ -2,14 +2,16 @@
     <div>
         <h2>Iniciar Sesión</h2>
         <form @submit.prevent="loginUser">
-            <input v-model="DNI" type="number" placeholder="DNI" required>
+            <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
             <input v-model="password" type="password" placeholder="Contraseña" required>
             <button type="submit">Iniciar Sesión</button>
+            <p>¿No estas registrado?</p><a href="RegistrarUsuario.vue">Registrate aqui</a>
         </form>
     </div>
 </template>
   
 <script>
+/* eslint-disable */
 export default {
     data() {
         return {
@@ -20,7 +22,7 @@ export default {
     methods: {
         loginUser() {
             axios.post('http://localhost:8000/api/login/', {
-                username: this.DNI,
+                username: this.username,
                 password: this.password
             })
                 .then(response => {
@@ -57,6 +59,5 @@ h2 {
 input {
     background-color: rgb(202, 208, 228);
 }
-
 </style>
   

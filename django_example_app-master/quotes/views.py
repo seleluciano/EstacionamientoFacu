@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Cliente,Sensor
+from .models import Sensor
+from usuarios.models import Cliente
 from .serializers import SensorSerializer, ClienteSerializer
 from django.shortcuts import render, redirect
 from usuarios.forms import ClienteCreationForm

@@ -1,17 +1,23 @@
 <template>
   <div id="app">
+    <RegistrarUsuario/>
+    <InicioSesion/>
     <Estacionamiento/>
   </div>
 </template>
 
 <script>
 /* eslint-disable */
+import InicioSesion from './components/InicioSesion.vue';
+import RegistrarUsuario from './components/RegistrarUsuario.vue';
 import Estacionamiento from './components/Estacionamiento.vue'
 export default {
   name: 'App',
   components: {
+    RegistrarUsuario,
+    InicioSesion,
     Estacionamiento
-  }
+}
 }
 </script>
 

@@ -15,11 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from quotes.views import main
+from quotes.views import main,register,ClienteViewSet, SensorViewSet
 from rest_framework.routers import DefaultRouter
-from quotes.views import ClienteViewSet, SensorViewSet
-from rest_framework.routers import DefaultRouter
-from quotes.views import register
 
 router = DefaultRouter()
 router.register(r'clientes', ClienteViewSet)

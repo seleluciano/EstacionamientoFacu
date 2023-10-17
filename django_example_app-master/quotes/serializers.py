@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Sensor, Cliente
+from .models import Sensor
+from usuarios.models import Cliente
 
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
