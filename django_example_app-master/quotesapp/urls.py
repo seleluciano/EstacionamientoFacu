@@ -19,7 +19,7 @@ from quotes.views import main
 from rest_framework.routers import DefaultRouter
 from quotes.views import ClienteViewSet, SensorViewSet
 from rest_framework.routers import DefaultRouter
-
+from quotes.views import register
 
 router = DefaultRouter()
 router.register(r'clientes', ClienteViewSet)
@@ -28,5 +28,6 @@ urlpatterns = [
      path('admin/', admin.site.urls),
      path('main/', main),
      path('api-auth/', include('rest_framework.urls')),
-     path('',include(router.urls))
+     path('',include(router.urls)),
+     path('register/', register, name='register')
 ]

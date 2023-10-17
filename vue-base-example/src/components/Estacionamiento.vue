@@ -1,14 +1,20 @@
 <template>
     <div>
         <h1>ESTACIONAMIENTO</h1>
-        <ul>
-            <li>Id</li>
-            <li>Estado</li>
-            <ul v-for="Sensor in sensores" :key="Sensor.id">
-                <li>{{ Sensor.id }}</li>
-                <li>{{ Sensor.estado }}</li>
-            </ul>
-        </ul>
+        <div class="columns">
+            <div class="column">
+                <h2>NUMERO</h2>
+                <ul v-for="Sensor in sensores" :key="Sensor.id">
+                    <li>{{ Sensor.id }}</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h2>ESTADO</h2>
+                <ul v-for="Sensor in sensores" :key="Sensor.id">
+                    <li>{{ Sensor.estado }}</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -25,7 +31,7 @@ export default {
         }
     },
     mounted() {
-        axios.get('http://localhost:8080/')
+        axios.get('http://localhost:8000/sensores/')
             .then(response => {
                 this.sensores = response.data;
             })
@@ -50,11 +56,22 @@ body {
 
 p,
 h1,
-ul {
+ul,h2 {
     color: black;
     font-family: cursive;
 }
 
 input {
     background-color: rgb(202, 208, 228);
-}</style>
+}
+
+.columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    flex: 1;
+    margin-right: 10px;
+}
+</style>

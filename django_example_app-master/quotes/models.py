@@ -9,3 +9,4 @@ class Cliente(models.Model):
     apellido = models.CharField(max_length=100)
     DNI = models.IntegerField()
     telefono = models.IntegerField()
+    contrasena=models.CharField(max_length=100)
