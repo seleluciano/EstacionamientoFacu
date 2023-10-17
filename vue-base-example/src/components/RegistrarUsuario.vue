@@ -19,7 +19,6 @@
         <p>¿Ya estas registrado?</p><a href="InicioSesion.vue">Iniciar Sesion</a>
     </div>
 </template>
-  
 <script>
 /* eslint-disable */
 export default {
@@ -86,5 +85,9 @@ input {
 .column {
     flex: 1;
     margin-right: 10px;
+}
+a{
+    color: white;
+    font-family: cursive;
 }
 </style>

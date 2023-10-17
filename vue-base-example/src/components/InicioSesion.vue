@@ -9,7 +9,6 @@
         </form>
     </div>
 </template>
-  
 <script>
 /* eslint-disable */
 export default {
@@ -58,6 +57,10 @@ h2 {
 
 input {
     background-color: rgb(202, 208, 228);
+}
+a{
+    color: white;
+    font-family: cursive;
 }
 </style>
   
