@@ -2,7 +2,8 @@
     <div>
         <h1>ESTACIONAMIENTO</h1>
         <ul>
-            <li>Id</li>         <li>Estado</li>
+            <li>Id</li>
+            <li>Estado</li>
             <ul v-for="Sensor in sensores" :key="Sensor.id">
                 <li>{{ Sensor.id }}</li>
                 <li>{{ Sensor.estado }}</li>
@@ -23,20 +24,14 @@ export default {
             estado: ''
         }
     },
-    methods: {
-        cargarDatos() {
-            axios.get('http://localhost:8080')
-                .then(response => {
-                    this.sensores = response.data
-                    console.log(response.data)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-        },
-    },
     mounted() {
-        this.cargarDatos()
+        axios.get('http://localhost:8080/')
+            .then(response => {
+                this.sensores = response.data;
+            })
+            .catch(error => {
+                console.error(error);
+            })
     }
 }
 </script>
@@ -54,12 +49,12 @@ body {
 }
 
 p,
-h1,ul{
+h1,
+ul {
     color: black;
     font-family: cursive;
 }
 
-input{
+input {
     background-color: rgb(202, 208, 228);
-}
-</style>
+}</style>
