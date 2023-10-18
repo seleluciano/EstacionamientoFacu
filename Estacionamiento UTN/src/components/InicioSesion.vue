@@ -6,7 +6,7 @@
             <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
             <input v-model="password" type="password" placeholder="Contraseña" required>
             <button type="submit">Iniciar Sesión</button>
-            <p>¿No estas registrado?</p><a href="RegistrarUsuario.vue">Registrate aqui</a>
+            <p>¿No estas registrado?</p><a href="RegistrarUsuario.vue">Registrese aqui</a>
         </form>
     </div>
 </template>

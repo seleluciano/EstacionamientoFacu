@@ -11,7 +11,7 @@
             <input v-model="telefono" type="number" placeholder="Telefono" required>
             <p>DNI:</p>
             <input v-model="DNI" type="number" placeholder="DNI" required>
-            <p>Nombre de Usuario</p>
+            <p>Nombre de Usuario:</p>
             <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
             <p>Contraseña:</p>
             <input v-model="password" type="password" placeholder="Contraseña" required>
