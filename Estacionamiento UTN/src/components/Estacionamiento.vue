@@ -11,7 +11,8 @@
             <div class="column">
                 <h2>ESTADO</h2>
                 <ul v-for="Sensor in sensores" :key="Sensor.id">
-                    <li>{{ Sensor.estado }}</li>
+                    <button v-if="Sensor.estado == true" class="Ocupado">Ocupado</button>
+                    <button v-if="Sensor.estado == false" class="Desocupado">Desocupado</button>
                 </ul>
             </div>
         </div>
@@ -49,14 +50,15 @@ export default {
 }
 
 body {
-    background-color: rgb(31, 49, 209);
+    background-color: bisque;
     width: 100%;
     height: 80%;
 }
 
 p,
 h1,
-ul,h2 {
+ul,
+h2 {
     color: black;
     font-family: cursive;
 }
@@ -73,5 +75,18 @@ input {
 .column {
     flex: 1;
     margin-right: 10px;
+}
+
+button {
+    color: white;
+    font-family: cursive;
+}
+
+.Ocupado {
+    background-color: red;
+}
+
+.Desocupado {
+    background-color: green;
 }
 </style>

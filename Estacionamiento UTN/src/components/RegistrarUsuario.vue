@@ -77,17 +77,14 @@ input {
     background-color: rgb(202, 208, 228);
 }
 
-.columns {
-    display: flex;
-    justify-content: space-between;
+a {
+    color: black;
+    font-family: cursive;
 }
 
-.column {
-    flex: 1;
-    margin-right: 10px;
-}
-a{
+button {
     color: white;
     font-family: cursive;
+    background-color: black;
 }
 </style>

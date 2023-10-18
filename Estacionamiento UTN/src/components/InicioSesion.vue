@@ -58,9 +58,16 @@ h2 {
 input {
     background-color: rgb(202, 208, 228);
 }
-a{
+
+a {
+    color: black;
+    font-family: cursive;
+}
+
+button {
     color: white;
     font-family: cursive;
+    background-color: black;
 }
 </style>
   
