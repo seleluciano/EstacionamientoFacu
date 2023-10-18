@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>ESTACIONAMIENTO UTN</h1>
         <h2>Iniciar Sesión</h2>
         <form @submit.prevent="loginUser">
             <input v-model="username" type="text" placeholder="Nombre de Usuario" required>

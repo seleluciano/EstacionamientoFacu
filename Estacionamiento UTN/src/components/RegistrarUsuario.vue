@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>ESTACIONAMIENTO UTN</h1>
         <h2>REGISTRAR USUARIO</h2>
         <form @submit.prevent="registerUser">
             <p>Nombre:</p>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>ESTACIONAMIENTO</h1>
+        <h1>ESTACIONAMIENTO UTN</h1>
         <div class="columns">
             <div class="column">
                 <h2>NUMERO</h2>
