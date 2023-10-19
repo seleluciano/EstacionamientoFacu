@@ -1,11 +1,11 @@
-#include <ESP8266WiFi.h>
+//Instalar librerias
+#include <ESP8266WiFi.h> 
 #include <ESP8266HTTPClient.h>
 
 int OUT = 2;  // Pin 2 de Arduino conectado a la salida del sensor
 int D = 0, O = 0;
-bool guardarestado, estadoanterior = false; // Inicializa estadoanterior como falso
-
-const char* ssid = "TU_SSID";
+bool guardarestado, estadoanterior = false; 
+const char* ssid = "TU_SSID"; 
 const char* password = "TU_CONTRASEÑA";
 const char* server = "DIRECCION_DEL_SERVIDOR";
 
@@ -43,7 +43,7 @@ void loop() {
 
   if (estadoanterior != guardarestado) {
     estadoanterior = guardarestado;
-    enviarEstado(guardarestado); // Llamamos a la función para enviar el estado
+    enviarEstado(guardarestado); //Envia el estado a django para modificarlo
   }
 }
 
