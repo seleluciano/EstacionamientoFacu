@@ -15,9 +15,9 @@
             <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
             <p>Contraseña:</p>
             <input v-model="password" type="password" placeholder="Contraseña" required>
-            <button type="submit">Registrar</button>
+            <button @click="Estacionamiento" type="submit">Registrar</button>
         </form>
-        <p>¿Ya estas registrado?</p><a href="InicioSesion.vue">Iniciar Sesion</a>
+        <p>¿Ya estas registrado?</p><button @click="redirectToAbout">Iniciar Sesion</button>
     </div>
 </template>
 <script>
@@ -44,11 +44,18 @@ export default {
                 password: this.password
             })
                 .then(response => {
-                    // Dirigir a Estacionamiento
+                    console.log(response);
+                    this.$router.push('/Estacionamiento');
                 })
                 .catch(error => {
                     console.error(error);
                 });
+        },
+        redirectToAbout() {
+            this.$router.push('/InicioSesion'); //Redirige a la pagina
+        },
+        Estacionamiento() {
+            this.$router.push('/');
         }
     }
 }
@@ -61,7 +68,7 @@ export default {
 }
 
 body {
-    background-color: rgb(31, 49, 209);
+    background-color: beige;
     width: 100%;
     height: 80%;
 }

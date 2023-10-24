@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect
 
 def main(request):
     return render(request, 'quotes/main.html')
@@ -31,7 +32,7 @@ def login_user(request):
         user = authenticate(request, DNI=DNI, password=password)
         if user is not None:
             login(request, user)
-            return redirect('dashboard')  # Redirigir a la página Estacionamiento
+            return redirect('main')   # Redirigir a la página Estacionamiento
     return render(request, 'usuarios/login.html')
 
 @csrf_exempt
