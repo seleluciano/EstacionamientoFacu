@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from quotes.views import main,register,ClienteViewSet, SensorViewSet
+from quotes.views import main,register,ClienteViewSet, SensorViewSet,actualizar_estado
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -26,5 +26,6 @@ urlpatterns = [
      path('main/', main),
      path('api-auth/', include('rest_framework.urls')),
      path('',include(router.urls)),
+     path('actualizar_estado/',actualizar_estado, name='actualizar_estado'),
      path('register/', register, name='register')
 ]

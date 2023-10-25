@@ -7,6 +7,9 @@ from django.shortcuts import render, redirect
 from usuarios.forms import ClienteCreationForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render, redirect
 
 def main(request):
     return render(request, 'quotes/main.html')
@@ -29,8 +32,23 @@ def login_user(request):
         user = authenticate(request, DNI=DNI, password=password)
         if user is not None:
             login(request, user)
-            return redirect('dashboard')  # Redirigir a la página Estacionamiento
+            return redirect('main')   # Redirigir a la página Estacionamiento
     return render(request, 'usuarios/login.html')
+
+@csrf_exempt
+def actualizar_estado(request):
+    if request.method == 'GET':
+        estado = request.GET.get('estado', None)
+        sensor_id = request.GET.get('id', None)
+
+        if estado is not None and sensor_id is not None:
+            Sensor.objects.filter(id=sensor_id).update(estado=estado)
+            
+            return JsonResponse({'mensaje': 'Estado actualizado correctamente'})
+        else:
+            return JsonResponse({'mensaje': 'Parámetro de estado o ID de sensor no proporcionado'}, status=400)
+    else:
+        return JsonResponse({'mensaje': 'Método no permitido'}, status=405)
 
 class ClienteViewSet(viewsets.ModelViewSet):
     queryset = Cliente.objects.all()

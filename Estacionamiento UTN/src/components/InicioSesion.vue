@@ -5,17 +5,18 @@
         <form @submit.prevent="loginUser">
             <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
             <input v-model="password" type="password" placeholder="Contraseña" required>
-            <button type="submit">Iniciar Sesión</button>
-            <p>¿No estas registrado?</p><a href="RegistrarUsuario.vue">Registrese aqui</a>
+            <button @click="Estacionamiento" type="submit">Iniciar Sesión</button>
+            <p>¿No estas registrado?</p><button @click="redirectToAbout">Registrese aqui</button>
         </form>
     </div>
 </template>
 <script>
 /* eslint-disable */
+import axios from 'axios';
 export default {
     data() {
         return {
-            DNI: '',
+            username: '',
             password: ''
         }
     },
@@ -26,11 +27,18 @@ export default {
                 password: this.password
             })
                 .then(response => {
-                    // Dirigir a Estacionamiento
+                    console.log(response);
+                    this.$router.push('/Estacionamiento');
                 })
                 .catch(error => {
                     console.error(error);
                 });
+        },
+        redirectToAbout() {
+            this.$router.push('/RegistrarUsuario'); //Redirige a la pagina
+        },
+        Estacionamiento() {
+            this.$router.push('/');
         }
     }
 }
@@ -43,7 +51,7 @@ export default {
 }
 
 body {
-    background-color: rgb(31, 49, 209);
+    background-color:beige;
     width: 100%;
     height: 80%;
 }

@@ -1,26 +1,18 @@
 <template>
   <div id="app">
-    <RegistrarUsuario/>
-    <InicioSesion/>
-    <Estacionamiento/>
+    <router-link to="/RegistrarUsuario">Registrar Usuario</router-link>
+    <router-link to="/InicioSesion">Iniciar Sesion</router-link>
+    <router-link to="/">Estacionamiento</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-/* eslint-disable */
-import InicioSesion from './components/InicioSesion.vue';
-import RegistrarUsuario from './components/RegistrarUsuario.vue';
-import Estacionamiento from './components/Estacionamiento.vue'
+/* eslint-disable */ 
 export default {
-  name: 'App',
-  components: {
-    RegistrarUsuario,
-    InicioSesion,
-    Estacionamiento
-}
+  name: 'App'
 }
 </script>
-
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
