@@ -75,7 +75,7 @@ h1 {
 }
 
 input {
-    background-color: #f0f0f0;
+    background-color:rgb(167, 167, 233);
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;

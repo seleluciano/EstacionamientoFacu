@@ -4,7 +4,7 @@
         <div class="columns">
             <div class="column">
                 <h2>NUMERO</h2>
-                <ul v-for="Sensor in sensores" :key="Sensor.id">
+                <ul v-for="Sensor in sensores" :key="Sensor.id" class="ID">
                     <li>{{ Sensor.id }}</li>
                 </ul>
             </div>
@@ -18,8 +18,6 @@
         </div>
     </div>
 </template>
-
-
 <script>
 /* eslint-disable */
 import axios from 'axios'
@@ -89,9 +87,27 @@ h1 {
     flex: 1;
     margin-right: 10px;
 }
-
+.ID {
+    color: black;
+    font-family: 'Helvetica Neue', sans-serif;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    margin-top: 8px; /* Ajuste para que estén a la misma altura */
+    cursor: pointer;
+}
+button {
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    margin-top: 10px; /* Ajuste para que estén a la misma altura */
+    cursor: pointer;
+}
 input {
-    background-color: #f0f0f0;
+    background-color:rgb(167, 167, 233);
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;
@@ -104,17 +120,6 @@ a {
     text-decoration: none;
     margin: 10px 0;
     display: inline-block;
-}
-
-button {
-    color: white;
-    font-family: 'Helvetica Neue', sans-serif;
-    background-color: #007BFF;
-    border: none;
-    border-radius: 4px;
-    padding: 12px 20px;
-    margin-top: 10px;
-    cursor: pointer;
 }
 
 .Ocupado {
