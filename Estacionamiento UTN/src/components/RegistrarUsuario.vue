@@ -60,6 +60,7 @@ export default {
     }
 }
 </script>
+//NO SE VE EL TITULO
 <style>
 * {
     margin: 0px;
