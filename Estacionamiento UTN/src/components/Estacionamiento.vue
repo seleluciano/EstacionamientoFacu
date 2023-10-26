@@ -49,18 +49,18 @@ export default {
 }
 
 body {
-    background-color: #f4f4f4; /* Un tono más suave que bisque */
-    font-family: Arial, sans-serif; /* Cambiado a una fuente más común */
+    background-color: #71abec;
+    font-family: Arial, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 150vh;
 }
 
 p,
 h2 {
     color: black;
-    font-family: cursive;
+    font-family: 'Helvetica Neue', sans-serif;
 }
 
 .container {
@@ -116,7 +116,7 @@ input {
 }
 
 a {
-    color: #007BFF;
+    color: #03376e;
     text-decoration: none;
     margin: 10px 0;
     display: inline-block;
@@ -141,5 +141,26 @@ ul {
 li {
     overflow: visible;
 }
-
 </style>
+
+@media only screen and (min-width: 320px) {
+    .grid {
+        grid-template-columns: repeat(1, 100%);
+        grid-template-rows: repeat(5, 20%);
+    }
+}
+
+
+@media only screen and (min-width: 480px) {
+    .grid {
+        grid-template-columns: repeat(2, 50%);
+        grid-template-rows: repeat(3, 33%);
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(3, 34%);
+        grid-template-rows: repeat(2, 50%);
+    }
+}
