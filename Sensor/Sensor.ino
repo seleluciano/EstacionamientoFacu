@@ -1,41 +1,34 @@
-#include <ArduinoWiFiServer.h>
-#include <BearSSLHelpers.h>
-#include <CertStoreBearSSL.h>
-#include <ESP8266WiFi.h>
-#include <ESP8266WiFiAP.h>
-#include <ESP8266WiFiGeneric.h>
-#include <ESP8266WiFiGratuitous.h>
-#include <ESP8266WiFiMulti.h>
-#include <ESP8266WiFiSTA.h>
-#include <ESP8266WiFiScan.h>
-#include <ESP8266WiFiType.h>
+#include <WiFi.h>
 #include <WiFiClient.h>
-#include <WiFiClientSecure.h>
-#include <WiFiClientSecureBearSSL.h>
 #include <WiFiServer.h>
-#include <WiFiServerSecure.h>
-#include <WiFiServerSecureBearSSL.h>
 #include <WiFiUdp.h>
-#include <ssl-tls-ca-key-cert-example.h>
-#include <ESP8266HTTPClient.h>
 
+#include <SerialESP8266wifi.h>
 
 int OUT = 2;  // Pin 2 de Arduino conectado a la salida del sensor
-int D = 0, O = 0;
+int D = 0, O = 0,ID=1;
 bool guardarestado, estadoanterior = false; 
-const char* ssid = "TU_SSID"; 
-const char* password = "TU_CONTRASEÑA";
-const char* server = "DIRECCION_DEL_SERVIDOR";
+
+#define WIFI_SSID "Utn_Libre Max"  // Nombre de la red a conectarse
+#define WIFI_PASSWORD ""           // Contraseña de la red
+
+void conectarWiFi() {
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  Serial.print("Conectando a Wi-Fi");
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(300);
+  }
+  Serial.println();
+  Serial.print("Conectado con IP: ");
+  Serial.println(WiFi.localIP());
+  Serial.println();
+}
 
 void setup() {
   Serial.begin(9600);
   pinMode(OUT, INPUT);
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("Conectando a WiFi...");
-  }
-  Serial.println("Conectado a WiFi");
+  conectarWiFi();
 }
 
 void loop() {
@@ -61,31 +54,29 @@ void loop() {
 
   if (estadoanterior != guardarestado) {
     estadoanterior = guardarestado;
-    enviarEstado(guardarestado); //Envia el estado a django para modificarlo
+    enviarEstado(ID,guardarestado); //Envia el estado a django para modificarlo
   }
 }
-
 
 void enviarEstado(int sensor_id, bool estado) {
-  HTTPClient http;
+  WiFiClient client;
 
   String url = "http://localhost:8000/actualizar_estado/";
-  
-  url += "?id=";
-  url += sensor_id;
-  url += "&estado=";
-  url += (estado ? "1" : "0");
+  url += "?id=" + String(sensor_id) + "&estado=" + String(estado ? "1" : "0");
 
-  http.begin(url);
-  int httpCode = http.GET();
+  if (client.connect("localhost", 8000)) {
+    client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+                 "Host: localhost\r\n" +
+                 "Connection: close\r\n\r\n");
 
-  if (httpCode > 0) {
-    String payload = http.getString();
-    Serial.println(payload);
+    while(client.connected() && !client.available()) delay(1);
+
+    while(client.connected() || client.available()) {
+      char c = client.read();
+      Serial.write(c);
+    }
+    client.stop();
   } else {
-    Serial.println("Error en la petición HTTP");
+    Serial.println("Error en la conexión");
   }
-
-  http.end();
 }
-
