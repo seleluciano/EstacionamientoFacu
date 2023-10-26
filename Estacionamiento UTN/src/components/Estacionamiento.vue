@@ -19,6 +19,7 @@
     </div>
 </template>
 
+
 <script>
 /* eslint-disable */
 import axios from 'axios'
@@ -50,21 +51,33 @@ export default {
 }
 
 body {
-    background-color: bisque;
-    width: 100%;
-    height: 80%;
+    background-color: #f4f4f4; /* Un tono más suave que bisque */
+    font-family: Arial, sans-serif; /* Cambiado a una fuente más común */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 p,
-h1,
-ul,
 h2 {
     color: black;
     font-family: cursive;
 }
 
-input {
-    background-color: rgb(202, 208, 228);
+.container {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #333;
+    margin-bottom: 20px;
 }
 
 .columns {
@@ -77,9 +90,31 @@ input {
     margin-right: 10px;
 }
 
+input {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+    margin: 10px 0;
+    display: inline-block;
+}
+
 button {
     color: white;
-    font-family: cursive;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    margin-top: 10px;
+    cursor: pointer;
 }
 
 .Ocupado {
@@ -89,4 +124,17 @@ button {
 .Desocupado {
     background-color: green;
 }
+
+/* Elimina los márgenes y el relleno en las listas */
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Permite que el texto se desborde fuera de la lista */
+li {
+    overflow: visible;
+}
+
 </style>
