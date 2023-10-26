@@ -62,37 +62,59 @@ export default {
 </script>
 <style>
 * {
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     box-sizing: border-box;
 }
 
 body {
-    background-color: beige;
-    width: 100%;
-    height: 80%;
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
-p,
-h1,
-ul,
-h2 {
-    color: black;
-    font-family: cursive;
+.container {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Helvetica Neue', sans-serif;
+    color: #333;
+    margin-bottom: 20px;
 }
 
 input {
-    background-color: rgb(202, 208, 228);
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
 }
 
 a {
-    color: black;
-    font-family: cursive;
+    color: #007BFF;
+    text-decoration: none;
+    margin: 10px 0;
+    display: inline-block;
 }
 
 button {
     color: white;
-    font-family: cursive;
-    background-color: black;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    margin-top: 10px;
+    cursor: pointer;
 }
 </style>
