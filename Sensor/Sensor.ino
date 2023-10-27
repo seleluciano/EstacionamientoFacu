@@ -3,8 +3,6 @@
 #include <WiFiServer.h>
 #include <WiFiUdp.h>
 
-#include <SerialESP8266wifi.h>
-
 int OUT = 2;  // Pin 2 de Arduino conectado a la salida del sensor
 int D = 0, O = 0,ID=1;
 bool guardarestado, estadoanterior = false; 
