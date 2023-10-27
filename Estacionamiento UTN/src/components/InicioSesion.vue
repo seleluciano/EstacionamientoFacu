@@ -6,7 +6,7 @@
             <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
             <input v-model="password" type="password" placeholder="Contraseña" required>
             <button @click="Estacionamiento" type="submit">Iniciar Sesión</button>
-            <p>¿No estas registrado?</p><button @click="redirectToAbout">Registrese aqui</button>
+            <p><br>¿No estas registrado?</p><button @click="redirectToAbout">Registrese aqui</button>
         </form>
     </div>
 </template>
@@ -51,12 +51,12 @@ export default {
 }
 
 body {
-    background-color: #f4f4f4;
+    background-color: #71abec;
     font-family: Arial, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 150vh;
 }
 
 .container {
@@ -75,7 +75,7 @@ h1 {
 }
 
 input {
-    background-color:rgb(167, 167, 233);
+    background-color:rgb(158, 203, 212);
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;
@@ -84,7 +84,7 @@ input {
 }
 
 a {
-    color: #007BFF;
+    color: #03376e;
     text-decoration: none;
     margin: 10px 0;
     display: inline-block;
@@ -101,3 +101,25 @@ button {
     cursor: pointer;
 }
 </style>
+
+@media only screen and (min-width: 320px) {
+    .grid {
+        grid-template-columns: repeat(1, 100%);
+        grid-template-rows: repeat(5, 20%);
+    }
+}
+
+
+@media only screen and (min-width: 480px) {
+    .grid {
+        grid-template-columns: repeat(2, 50%);
+        grid-template-rows: repeat(3, 33%);
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(3, 34%);
+        grid-template-rows: repeat(2, 50%);
+    }
+}
