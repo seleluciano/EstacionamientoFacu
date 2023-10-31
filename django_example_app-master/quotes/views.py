@@ -7,22 +7,17 @@ from usuarios.forms import ClienteCreationForm
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authtoken.models import Token  # Agregada importación para Token
 
 def main(request):
-    return render(request, 'vue_templates/main.html')  # Cambiado a la ruta de tu plantilla de Vue
-
-def vue_registro_view(request):
-    return render(request, 'vue_templates/register.vue')
-
-def vue_inicio_view(request):
-    return render(request, 'vue_templates/inicio.vue')  # Cambiado a la ruta de tu plantilla de Vue
+    return render(request, 'vue_templates/main.html')  
 
 def register(request):
     if request.method == 'POST':
         form = ClienteCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('vue_inicio')  # Redirige a la página de inicio de Vue
+            return redirect('login_user')
     else:
         form = ClienteCreationForm()
 
@@ -35,7 +30,8 @@ def login_user(request):
         user = authenticate(request, DNI=DNI, password=password)
         if user is not None:
             login(request, user)
-            return redirect('vue_estacionamiento')   # Redirige a la página de estacionamiento de Vue
+            token= Token.objects.get_or_create(user=user)  # Obtener o crear un token para el usuario
+            return JsonResponse({'token': token.key})  # Devolver el token al cliente
     return render(request, 'vue_templates/InicioSesion.vue')
 
 @csrf_exempt

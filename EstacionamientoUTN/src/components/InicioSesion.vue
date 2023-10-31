@@ -5,11 +5,12 @@
         <form @submit.prevent="loginUser">
             <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
             <input v-model="password" type="password" placeholder="Contraseña" required>
-            <button @click="Estacionamiento" type="submit">Iniciar Sesión</button>
-            <p><br>¿No estas registrado?</p><button @click="redirectToAbout">Registrese aqui</button>
+            <button type="submit">Iniciar Sesión</button>
+            <p><br>¿No estás registrado?</p><button @click="redirectToAbout">Registrese aquí</button>
         </form>
     </div>
 </template>
+
 <script>
 /* eslint-disable */
 import axios from 'axios';
@@ -28,6 +29,8 @@ export default {
             })
                 .then(response => {
                     console.log(response);
+                    const token = response.data.token;  // Extraer el token de la respuesta
+                    localStorage.setItem('token', token);  // Guardar el token en localStorage
                     this.$router.push('/Estacionamiento');
                 })
                 .catch(error => {
@@ -40,6 +43,7 @@ export default {
     }
 }
 </script>
+
 <style>
 * {
     margin: 0px;

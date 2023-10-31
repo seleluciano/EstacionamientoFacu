@@ -22,6 +22,8 @@
 </template>
 <script>
 /* eslint-disable */
+import axios from 'axios';
+
 export default {
     data() {
         return {
@@ -45,6 +47,8 @@ export default {
             })
                 .then(response => {
                     console.log(response);
+                    const token = response.data.token;  // Extraer el token de la respuesta
+                    localStorage.setItem('token', token);  // Guardar el token en localStorage
                     this.$router.push('/Estacionamiento');
                 })
                 .catch(error => {
@@ -52,7 +56,7 @@ export default {
                 });
         },
         redirectToAbout() {
-            this.$router.push('/InicioSesion'); //Redirige a la pagina
+            this.$router.push('/InicioSesion'); // Redirige a la página
         }
     }
 }
