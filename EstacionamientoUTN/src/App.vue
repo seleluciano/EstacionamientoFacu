@@ -25,8 +25,6 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
   text-align: center;
 }
-</style>
-
 @media only screen and (min-width: 320px) {
   .grid {
       grid-template-columns: repeat(1, 100%);
@@ -48,3 +46,4 @@ export default {
       grid-template-rows: repeat(2, 50%);
   }
 }
+</style>

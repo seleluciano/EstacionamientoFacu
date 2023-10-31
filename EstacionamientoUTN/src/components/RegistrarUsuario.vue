@@ -89,7 +89,7 @@ h1 {
 }
 
 input {
-    background-color:rgb(158, 203, 212);
+    background-color: rgb(158, 203, 212);
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;
@@ -114,8 +114,6 @@ button {
     margin-top: 10px;
     cursor: pointer;
 }
-</style>
-
 @media only screen and (min-width: 320px) {
     .grid {
         grid-template-columns: repeat(1, 100%);
@@ -137,3 +135,4 @@ button {
         grid-template-rows: repeat(2, 50%);
     }
 }
+</style>
