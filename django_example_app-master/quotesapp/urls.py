@@ -1,31 +1,35 @@
-"""quotesapp URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
-from quotes.views import main,register,ClienteViewSet, SensorViewSet,actualizar_estado
+from quotes.views import main, register, ClienteViewSet, SensorViewSet, actualizar_estado, login_user
 from rest_framework.routers import DefaultRouter
+from quotes import views
+from EstacionamientoUTN.src import routers
+import json
 
 router = DefaultRouter()
 router.register(r'clientes', ClienteViewSet)
 router.register(r'sensores', SensorViewSet)
-urlpatterns = [
-     path('admin/', admin.site.urls),
-     path('main/', main),
-     path('api-auth/', include('rest_framework.urls')),
-     path('',include(router.urls)),
-     path('actualizar_estado/',actualizar_estado, name='actualizar_estado'),
-     path('register/', register, name='register')
+
+with open('../EstacionamientoFacu/src/router.json', 'r') as file:
+    routes = json.load(file)
+
+vue_urlpatterns = [
+    path(route['path'], getattr(views, route['name']), name=route['name'])
+    for route in routes
 ]
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('main/', main),
+    path('api-auth/', include('rest_framework.urls')),
+    path('', include(router.urls)),
+    path('actualizar_estado/', actualizar_estado, name='actualizar_estado'),
+    path('register/', register, name='register'),
+    path('login_user/', login_user, name='login_user'),
+    path('registro/', routers.inicio, name='vue_registro'),
+    path('inicio/', routers.inicio, name='vue_inicio'),
+    path('estacionamiento/', routers.estacionamiento, name='vue_estacionamiento')
+]
+
+# Agregar las rutas de Vue al urlpatterns
+urlpatterns += vue_urlpatterns

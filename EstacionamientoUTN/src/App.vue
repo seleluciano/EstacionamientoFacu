@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <router-link to="/RegistrarUsuario" style="margin-right: 20px;">Registrar Usuario</router-link>
-    <router-link to="/InicioSesion" style="margin-right: 20px;">Iniciar Sesion</router-link>
+    <router-link to="/registrer" style="margin-right: 20px;">Registrar Usuario</router-link>
+    <router-link to="/login_user" style="margin-right: 20px;">Iniciar Sesion</router-link>
     <router-link to="/" style="margin-right: 20px;">Estacionamiento</router-link>
     <router-view></router-view>
   </div>

@@ -4,11 +4,11 @@ import InicioSesion from './components/InicioSesion.vue'
 /* eslint-disable */
 const routes = [
    {
-    path: '/RegistrarUsuario',
+    path: '/registro',
     component: RegistrarUsuario
   },
   {
-    path: '/InicioSesion',
+    path: '/inicio',
     component: InicioSesion
   },
   {

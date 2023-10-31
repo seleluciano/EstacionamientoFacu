@@ -1,45 +1,28 @@
 <template>
     <div>
         <h1>ESTACIONAMIENTO UTN</h1>
-        <h2>REGISTRAR USUARIO</h2>
-        <form @submit.prevent="registerUser">
-            <p>Nombre:</p>
-            <input v-model="nombre" type="text" placeholder="Nombre" required>
-            <p>Apellido:</p>
-            <input v-model="apellido" type="text" placeholder="Apellido" required>
-            <p>Telefono:</p>
-            <input v-model="telefono" type="number" placeholder="Telefono" required>
-            <p>DNI:</p>
-            <input v-model="DNI" type="number" placeholder="DNI" required>
-            <p>Nombre de Usuario:</p>
+        <h2>Iniciar Sesión</h2>
+        <form @submit.prevent="loginUser">
             <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
-            <p>Contraseña:</p>
             <input v-model="password" type="password" placeholder="Contraseña" required>
-            <button @click="Estacionamiento" type="submit">Registrar</button>
+            <button @click="Estacionamiento" type="submit">Iniciar Sesión</button>
+            <p><br>¿No estas registrado?</p><button @click="redirectToAbout">Registrese aqui</button>
         </form>
-        <p><br>¿Ya estas registrado?</p><button @click="redirectToAbout">Iniciar Sesion</button>
     </div>
 </template>
 <script>
 /* eslint-disable */
+import axios from 'axios';
 export default {
     data() {
         return {
-            nombre: '',
-            apellido: '',
-            telefono: '',
-            DNI: '',
             username: '',
             password: ''
         }
     },
     methods: {
-        registerUser() {
-            axios.post('http://localhost:8000/api/register/', {
-                nombre: this.nombre,
-                apellido: this.apellido,
-                telefono: this.telefono,
-                DNI: this.DNI,
+        loginUser() {
+            axios.post('http://localhost:8000/api/login/', {
                 username: this.username,
                 password: this.password
             })
@@ -52,10 +35,7 @@ export default {
                 });
         },
         redirectToAbout() {
-            this.$router.push('/InicioSesion'); //Redirige a la pagina
-        },
-        Estacionamiento() {
-            this.$router.push('/');
+            this.$router.push('/RegistrarUsuario'); //Redirige a la pagina
         }
     }
 }
