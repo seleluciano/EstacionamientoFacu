@@ -26,7 +26,7 @@ def register(request):
     else:
         form = ClienteCreationForm()
 
-    return render(request, 'vue_templates/register.vue', {'form': form})
+    return render(request, 'vue_templates/ResistrarUsuario.vue', {'form': form})
 
 def login_user(request):
     if request.method == 'POST':
@@ -36,7 +36,7 @@ def login_user(request):
         if user is not None:
             login(request, user)
             return redirect('vue_estacionamiento')   # Redirige a la página de estacionamiento de Vue
-    return render(request, 'vue_templates/login.vue')
+    return render(request, 'vue_templates/InicioSesion.vue')
 
 @csrf_exempt
 def actualizar_estado(request):
