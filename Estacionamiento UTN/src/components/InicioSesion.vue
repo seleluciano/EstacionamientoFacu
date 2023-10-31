@@ -106,15 +106,12 @@ button {
         grid-template-rows: repeat(5, 20%);
     }
 }
-
-
 @media only screen and (min-width: 480px) {
     .grid {
         grid-template-columns: repeat(2, 50%);
         grid-template-rows: repeat(3, 33%);
     }
 }
-
 @media only screen and (min-width: 768px) {
     .grid {
         grid-template-columns: repeat(3, 34%);
