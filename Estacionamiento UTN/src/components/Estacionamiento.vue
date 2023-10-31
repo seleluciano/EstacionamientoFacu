@@ -141,8 +141,6 @@ ul {
 li {
     overflow: visible;
 }
-</style>
-
 @media only screen and (min-width: 320px) {
     .grid {
         grid-template-columns: repeat(1, 100%);
@@ -164,3 +162,4 @@ li {
         grid-template-rows: repeat(2, 50%);
     }
 }
+</style>
