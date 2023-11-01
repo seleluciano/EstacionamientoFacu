@@ -15,7 +15,7 @@
             <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
             <p>Contraseña:</p>
             <input v-model="password" type="password" placeholder="Contraseña" required>
-            <button @click="Estacionamiento" type="submit">Registrar</button>
+            <button type="submit">REGISTRAR</button>
         </form>
         <p><br>¿Ya estas registrado?</p><button @click="redirectToAbout">Iniciar Sesion</button>
     </div>
@@ -32,12 +32,12 @@ export default {
             telefono: '',
             DNI: '',
             username: '',
-            password: ''
+            password: '',
         }
     },
     methods: {
         registerUser() {
-            axios.post('http://localhost:8000/api/register/', {
+            axios.post('http://localhost:8000/register/', {
                 nombre: this.nombre,
                 apellido: this.apellido,
                 telefono: this.telefono,
@@ -47,16 +47,17 @@ export default {
             })
                 .then(response => {
                     console.log(response);
-                    const token = response.data.token;  // Extraer el token de la respuesta
-                    localStorage.setItem('token', token);  // Guardar el token en localStorage
-                    this.$router.push('/Estacionamiento');
+                    const token = response.data.token;
+                    localStorage.setItem('token', token);
+                    console.log('Redirigiendo a /estacionamiento');
+                    this.$router.push('/estacionamiento');
                 })
                 .catch(error => {
                     console.error(error);
                 });
         },
         redirectToAbout() {
-            this.$router.push('/InicioSesion'); // Redirige a la página
+            this.$router.push('/inicio'); // Redirige a la página
         }
     }
 }
@@ -74,7 +75,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 150vh;
+    height: 80%;
 }
 
 .container {
@@ -118,6 +119,7 @@ button {
     margin-top: 10px;
     cursor: pointer;
 }
+
 @media only screen and (min-width: 320px) {
     .grid {
         grid-template-columns: repeat(1, 100%);

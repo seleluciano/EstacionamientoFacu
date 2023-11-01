@@ -42,25 +42,13 @@ export default {
 }
 </script>
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     background-color: #71abec;
     font-family: Arial, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 150vh;
-}
-
-p,
-h2 {
-    color: black;
-    font-family: 'Helvetica Neue', sans-serif;
+    height: 80%;
 }
 
 .container {
@@ -76,6 +64,22 @@ h1 {
     font-family: 'Helvetica Neue', sans-serif;
     color: #333;
     margin-bottom: 20px;
+}
+
+input {
+    background-color: rgb(158, 203, 212);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+}
+
+a {
+    color: #03376e;
+    text-decoration: none;
+    margin: 10px 0;
+    display: inline-block;
 }
 
 .columns {
@@ -105,21 +109,6 @@ button {
     padding: 12px 20px;
     margin-top: 10px; /* Ajuste para que estén a la misma altura */
     cursor: pointer;
-}
-input {
-    background-color:rgb(167, 167, 233);
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px;
-    margin: 10px 0;
-    width: 100%;
-}
-
-a {
-    color: #03376e;
-    text-decoration: none;
-    margin: 10px 0;
-    display: inline-block;
 }
 
 .Ocupado {

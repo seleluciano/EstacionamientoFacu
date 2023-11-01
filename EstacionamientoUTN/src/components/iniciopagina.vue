@@ -1,49 +1,9 @@
 <template>
     <div>
-        <h1>ESTACIONAMIENTO UTN</h1>
-        <h2>Iniciar Sesión</h2>
-        <form @submit.prevent="loginUser">
-            <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
-            <input v-model="password" type="password" placeholder="Contraseña" required>
-            <button type="submit">INICIAR SESION</button>
-            <p><br>¿No estás registrado?</p><button @click="redirectToAbout">Registrese aquí</button>
-        </form>
+        <h1>¡¡BIENVENIDO!!</h1>
+        <h2>ESTACIONAMIENTO UTN</h2>
     </div>
 </template>
-
-<script>
-/* eslint-disable */
-import axios from 'axios';
-export default {
-    data() {
-        return {
-            username: '',
-            password: '',
-        }
-    },
-    methods: {
-        loginUser() {
-            axios.post('http://localhost:8000/login/', {
-                username: this.username,
-                password: this.password
-            })
-                .then(response => {
-                    console.log(response);
-                    const token = response.data.token;
-                    localStorage.setItem('token', token);
-                    console.log('Redirigiendo a /estacionamiento');
-                    this.$router.push('/estacionamiento');
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        },
-        redirectToAbout() {
-            this.$router.push('/registro'); //Redirige a la pagina
-        }
-    }
-}
-</script>
 <style>
 * {
     margin: 0px;
@@ -108,7 +68,6 @@ button {
         grid-template-rows: repeat(5, 20%);
     }
 }
-
 
 @media only screen and (min-width: 480px) {
     .grid {

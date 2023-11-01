@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from rest_framework import viewsets
 from .models import Sensor
 from usuarios.models import Cliente
@@ -12,17 +12,22 @@ from rest_framework.authtoken.models import Token  # Agregada importación para 
 def main(request):
     return render(request, 'vue_templates/main.html')  
 
+@csrf_exempt
 def register(request):
     if request.method == 'POST':
         form = ClienteCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login_user')
-    else:
-        form = ClienteCreationForm()
 
-    return render(request, 'vue_templates/ResistrarUsuario.vue', {'form': form})
+            # Obtener o crear un token para el usuario recién registrado
+            user = form.instance
+            token= Token.objects.get_or_create(user=user)
 
+            return JsonResponse({'token': token.key})  # Devolver el token al cliente
+        else:
+            return JsonResponse({'errors': form.errors}, status=400)
+    
+@csrf_exempt
 def login_user(request):
     if request.method == 'POST':
         DNI = request.POST['DNI']
@@ -30,10 +35,9 @@ def login_user(request):
         user = authenticate(request, DNI=DNI, password=password)
         if user is not None:
             login(request, user)
-            token= Token.objects.get_or_create(user=user)  # Obtener o crear un token para el usuario
+            token = Token.objects.get_or_create(user=user)  # Obtener o crear un token para el usuario
             return JsonResponse({'token': token.key})  # Devolver el token al cliente
-    return render(request, 'vue_templates/InicioSesion.vue')
-
+    return JsonResponse({'error': 'Credenciales inválidas'}, status=400)
 @csrf_exempt
 def actualizar_estado(request):
     if request.method == 'GET':

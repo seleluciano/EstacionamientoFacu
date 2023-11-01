@@ -1,6 +1,7 @@
 import Estacionamiento from './components/Estacionamiento.vue'
 import RegistrarUsuario from './components/RegistrarUsuario.vue'
 import InicioSesion from './components/InicioSesion.vue'
+import iniciopagina from './components/iniciopagina.vue'
 /* eslint-disable */
 const routes = [
    {
@@ -12,8 +13,12 @@ const routes = [
     component: InicioSesion
   },
   {
-    path: '/',
+    path: '/estacionamiento',
     component: Estacionamiento
+  },
+  {
+    path: '/',
+    component: iniciopagina
   }
 ]
 export default routes
