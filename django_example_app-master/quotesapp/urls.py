@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
-from quotes.views import main, register, ClienteViewSet, SensorViewSet, actualizar_estado, login_user
+from quotes.views import main, register, SensorViewSet,UserViewSet,actualizar_estado, login_user
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken.views import obtain_auth_token
 
 router = DefaultRouter()
-router.register(r'clientes', ClienteViewSet)
+router.register(r'usuarios', UserViewSet)
 router.register(r'sensores', SensorViewSet)
 
 

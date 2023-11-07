@@ -1,43 +1,47 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from .models import Sensor
-from usuarios.models import Cliente
-from .serializers import SensorSerializer, ClienteSerializer
-from usuarios.forms import ClienteCreationForm
+from .serializers import SensorSerializer,UserSerializer
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token  # Agregada importación para Token
+from rest_framework.decorators import api_view
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 
 def main(request):
     return render(request, 'vue_templates/main.html')  
 
-@csrf_exempt
+@api_view(['POST'])
 def register(request):
     if request.method == 'POST':
-        form = ClienteCreationForm(request.POST)
+        form = UserCreationForm(request.data)
         if form.is_valid():
             form.save()
-
             # Obtener o crear un token para el usuario recién registrado
             user = form.instance
-            token= Token.objects.get_or_create(user=user)
-
-            return JsonResponse({'token': token.key})  # Devolver el token al cliente
+            token, _= Token.objects.get_or_create(user=user)
+            return JsonResponse({'token': str(token)})  # Devolver el token al cliente
         else:
+            print(form.errors)
             return JsonResponse({'errors': form.errors}, status=400)
     
-@csrf_exempt
+@api_view(['POST'])
 def login_user(request):
     if request.method == 'POST':
-        DNI = request.POST['DNI']
-        password = request.POST['password']
-        user = authenticate(request, DNI=DNI, password=password)
+        username = request.data['username']
+        password = request.data['password']
+        user = authenticate(request, username=username, password=password)
+        #import pdb;
+        #pdb.set_trace()
         if user is not None:
             login(request, user)
-            token = Token.objects.get_or_create(user=user)  # Obtener o crear un token para el usuario
-            return JsonResponse({'token': token.key})  # Devolver el token al cliente
+            token, _ = Token.objects.get_or_create(user=user)  # Obtener o crear un token para el usuario
+            return JsonResponse({'token': str(token)})  # Devolver el token al cliente
     return JsonResponse({'error': 'Credenciales inválidas'}, status=400)
+
 @csrf_exempt
 def actualizar_estado(request):
     if request.method == 'GET':
@@ -52,9 +56,9 @@ def actualizar_estado(request):
     else:
         return JsonResponse({'mensaje': 'Método no permitido'}, status=405)
 
-class ClienteViewSet(viewsets.ModelViewSet):
-    queryset = Cliente.objects.all()
-    serializer_class = ClienteSerializer
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
     authentication_classes = []
     permission_classes = []
 

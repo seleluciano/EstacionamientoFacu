@@ -3,7 +3,7 @@
     <router-link to="/" style="margin-right: 20px;">Inicio</router-link>
     <router-link to="/registro" style="margin-right: 20px;">Registrar Usuario</router-link>
     <router-link to="/inicio" style="margin-right: 20px;">Iniciar Sesion</router-link>
-    <router-link to="/estacionamiento" style="margin-right: 20px;">Estacionamiento</router-link>
+    <!--<router-link to="/estacionamiento" style="margin-right: 20px;">Estacionamiento</router-link>-->
     <router-view></router-view>
   </div>
 </template>

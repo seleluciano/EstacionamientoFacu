@@ -7,11 +7,9 @@
             <input v-model="nombre" type="text" placeholder="Nombre" required>
             <p>Apellido:</p>
             <input v-model="apellido" type="text" placeholder="Apellido" required>
-            <p>Telefono:</p>
-            <input v-model="telefono" type="number" placeholder="Telefono" required>
-            <p>DNI:</p>
-            <input v-model="DNI" type="number" placeholder="DNI" required>
-            <p>Nombre de Usuario:</p>
+            <p>Email:</p>
+            <input v-model="telefono" type="email" placeholder="Email" required>
+            <p>Usuario:</p>
             <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
             <p>Contraseña:</p>
             <input v-model="password" type="password" placeholder="Contraseña" required>
@@ -27,23 +25,22 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            nombre: '',
-            apellido: '',
-            telefono: '',
-            DNI: '',
-            username: '',
+            first_name: '',
+            last_name: '',
             password: '',
+            email:'',
+            username:''
         }
     },
     methods: {
         registerUser() {
             axios.post('http://localhost:8000/register/', {
-                nombre: this.nombre,
-                apellido: this.apellido,
-                telefono: this.telefono,
-                DNI: this.DNI,
-                username: this.username,
-                password: this.password
+                first_name: this.nombre,
+                last_name: this.apellido,
+                email:this.email,
+                password1: this.password,
+                password2: this.password,
+                username:this.username
             })
                 .then(response => {
                     console.log(response);
