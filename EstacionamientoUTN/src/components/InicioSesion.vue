@@ -35,6 +35,7 @@ export default {
                     this.$router.push('/estacionamiento');
                 })
                 .catch(error => {
+                    window.alert('Los datos ingresados son incorrectos, Intentelo nuevamente');
                     console.error(error);
                 });
         },

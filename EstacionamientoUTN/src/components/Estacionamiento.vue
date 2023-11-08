@@ -16,6 +16,7 @@
                 </ul>
             </div>
         </div>
+        <button onclick="salir" class="Salir">Salir</button>
     </div>
 </template>
 <script>
@@ -36,8 +37,14 @@ export default {
                 this.sensores = response.data;
             })
             .catch(error => {
+                window.alert('Error al cargar los sensores. Por favor, inténtalo de nuevo más tarde.');
                 console.error(error);
             })
+    },
+    methods: {
+        salir() {
+            this.$router.push('/');
+        }
     }
 }
 </script>
@@ -91,15 +98,18 @@ a {
     flex: 1;
     margin-right: 10px;
 }
+
 .ID {
     color: black;
     font-family: 'Helvetica Neue', sans-serif;
     border: none;
     border-radius: 4px;
     padding: 12px 20px;
-    margin-top: 8px; /* Ajuste para que estén a la misma altura */
+    margin-top: 8px;
+    /* Ajuste para que estén a la misma altura */
     cursor: pointer;
 }
+
 button {
     color: white;
     font-family: 'Helvetica Neue', sans-serif;
@@ -107,7 +117,8 @@ button {
     border: none;
     border-radius: 4px;
     padding: 12px 20px;
-    margin-top: 10px; /* Ajuste para que estén a la misma altura */
+    margin-top: 10px;
+    /* Ajuste para que estén a la misma altura */
     cursor: pointer;
 }
 
@@ -130,6 +141,21 @@ ul {
 li {
     overflow: visible;
 }
+
+.Salir {
+    color: black;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: red;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
 @media only screen and (min-width: 320px) {
     .grid {
         grid-template-columns: repeat(1, 100%);
@@ -150,5 +176,4 @@ li {
         grid-template-columns: repeat(3, 34%);
         grid-template-rows: repeat(2, 50%);
     }
-}
-</style>
+}</style>
