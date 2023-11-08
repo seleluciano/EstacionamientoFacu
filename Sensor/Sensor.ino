@@ -3,15 +3,14 @@
 #include <WiFiServer.h>
 #include <WiFiUdp.h>
 
-#include <SerialESP8266wifi.h>
-
 int OUT = 2;  // Pin 2 de Arduino conectado a la salida del sensor
 int D = 0, O = 0,ID=1;
 bool guardarestado, estadoanterior = false; 
 
-#define WIFI_SSID "Utn_Libre Max"  // Nombre de la red a conectarse
-#define WIFI_PASSWORD ""           // Contraseña de la red
-
+//UTN #define WIFI_SSID "Utn_Libre Max"  // Nombre de la red a conectarse
+//UTN #define WIFI_PASSWORD ""           // Contraseña de la red
+#define WIFI_SSID "Personal-E78"  
+#define WIFI_PASSWORD "COE2953E78"           
 void conectarWiFi() {
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Conectando a Wi-Fi");

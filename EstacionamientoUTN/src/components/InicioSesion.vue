@@ -1,61 +1,46 @@
 <template>
     <div>
         <h1>ESTACIONAMIENTO UTN</h1>
-        <h2>REGISTRAR USUARIO</h2>
-        <form @submit.prevent="registerUser">
-            <p>Nombre:</p>
-            <input v-model="nombre" type="text" placeholder="Nombre" required>
-            <p>Apellido:</p>
-            <input v-model="apellido" type="text" placeholder="Apellido" required>
-            <p>Telefono:</p>
-            <input v-model="telefono" type="number" placeholder="Telefono" required>
-            <p>DNI:</p>
-            <input v-model="DNI" type="number" placeholder="DNI" required>
-            <p>Nombre de Usuario:</p>
+        <h2>Iniciar Sesión</h2>
+        <form @submit.prevent="loginUser">
             <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
-            <p>Contraseña:</p>
             <input v-model="password" type="password" placeholder="Contraseña" required>
-            <button @click="Estacionamiento" type="submit">Registrar</button>
+            <button type="submit">INICIAR SESION</button>
+            <p><br>¿No estás registrado?</p><button @click="redirectToAbout">Registrese aquí</button>
         </form>
-        <p><br>¿Ya estas registrado?</p><button @click="redirectToAbout">Iniciar Sesion</button>
     </div>
 </template>
+
 <script>
 /* eslint-disable */
+import axios from 'axios';
 export default {
     data() {
         return {
-            nombre: '',
-            apellido: '',
-            telefono: '',
-            DNI: '',
             username: '',
-            password: ''
+            password: '',
         }
     },
     methods: {
-        registerUser() {
-            axios.post('http://localhost:8000/api/register/', {
-                nombre: this.nombre,
-                apellido: this.apellido,
-                telefono: this.telefono,
-                DNI: this.DNI,
+        loginUser() {
+            axios.post('http://localhost:8000/login_user/', {
                 username: this.username,
                 password: this.password
             })
                 .then(response => {
                     console.log(response);
-                    this.$router.push('/Estacionamiento');
+                    const token = response.data.token;
+                    localStorage.setItem('token', token);
+                    console.log('Redirigiendo a /estacionamiento');
+                    this.$router.push('/estacionamiento');
                 })
                 .catch(error => {
+                    window.alert('Los datos ingresados son incorrectos, Intentelo nuevamente');
                     console.error(error);
                 });
         },
         redirectToAbout() {
-            this.$router.push('/InicioSesion'); //Redirige a la pagina
-        },
-        Estacionamiento() {
-            this.$router.push('/');
+            this.$router.push('/registro'); //Redirige a la pagina
         }
     }
 }
@@ -73,7 +58,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 150vh;
+    height: 80%;
 }
 
 .container {
@@ -117,6 +102,7 @@ button {
     margin-top: 10px;
     cursor: pointer;
 }
+
 @media only screen and (min-width: 320px) {
     .grid {
         grid-template-columns: repeat(1, 100%);

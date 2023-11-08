@@ -16,6 +16,7 @@
                 </ul>
             </div>
         </div>
+        <button @click="salir" class="Salir">Salir</button>
     </div>
 </template>
 <script>
@@ -36,31 +37,25 @@ export default {
                 this.sensores = response.data;
             })
             .catch(error => {
+                window.alert('Error al cargar los sensores. Por favor, inténtalo de nuevo más tarde.');
                 console.error(error);
             })
+    },
+    methods: {
+        salir() {
+            this.$router.push('/');
+        }
     }
 }
 </script>
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     background-color: #71abec;
     font-family: Arial, sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 150vh;
-}
-
-p,
-h2 {
-    color: black;
-    font-family: 'Helvetica Neue', sans-serif;
+    height: 80%;
 }
 
 .container {
@@ -78,36 +73,8 @@ h1 {
     margin-bottom: 20px;
 }
 
-.columns {
-    display: flex;
-    justify-content: space-between;
-}
-
-.column {
-    flex: 1;
-    margin-right: 10px;
-}
-.ID {
-    color: black;
-    font-family: 'Helvetica Neue', sans-serif;
-    border: none;
-    border-radius: 4px;
-    padding: 12px 20px;
-    margin-top: 8px; /* Ajuste para que estén a la misma altura */
-    cursor: pointer;
-}
-button {
-    color: white;
-    font-family: 'Helvetica Neue', sans-serif;
-    background-color: #007BFF;
-    border: none;
-    border-radius: 4px;
-    padding: 12px 20px;
-    margin-top: 10px; /* Ajuste para que estén a la misma altura */
-    cursor: pointer;
-}
 input {
-    background-color:rgb(167, 167, 233);
+    background-color: rgb(158, 203, 212);
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;
@@ -120,6 +87,39 @@ a {
     text-decoration: none;
     margin: 10px 0;
     display: inline-block;
+}
+
+.columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.ID {
+    color: black;
+    font-family: 'Helvetica Neue', sans-serif;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    margin-top: 8px;
+    /* Ajuste para que estén a la misma altura */
+    cursor: pointer;
+}
+
+button {
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    margin-top: 10px;
+    /* Ajuste para que estén a la misma altura */
+    cursor: pointer;
 }
 
 .Ocupado {
@@ -141,6 +141,21 @@ ul {
 li {
     overflow: visible;
 }
+
+.Salir {
+    color: black;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: red;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
 @media only screen and (min-width: 320px) {
     .grid {
         grid-template-columns: repeat(1, 100%);
@@ -158,5 +173,4 @@ li {
         grid-template-columns: repeat(3, 34%);
         grid-template-rows: repeat(2, 50%);
     }
-}
-</style>
+}</style>

@@ -1,11 +1,10 @@
 from rest_framework import serializers
 from .models import Sensor
-from usuarios.models import Cliente
-
-class ClienteSerializer(serializers.ModelSerializer):
+from django.contrib.auth.models import User
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Cliente
-        fields = ['nombre','apellido','DNI','telefono']
+        model = User
+        fields = ['first_name','last_name','email','username','password']
 
 class  SensorSerializer(serializers.ModelSerializer):
     class Meta:

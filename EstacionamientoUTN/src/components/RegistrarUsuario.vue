@@ -1,44 +1,61 @@
 <template>
     <div>
         <h1>ESTACIONAMIENTO UTN</h1>
-        <h2>Iniciar Sesión</h2>
-        <form @submit.prevent="loginUser">
+        <h2>REGISTRAR USUARIO</h2>
+        <form @submit.prevent="registerUser">
+            <p>Nombre:</p>
+            <input v-model="nombre" type="text" placeholder="Nombre" required>
+            <p>Apellido:</p>
+            <input v-model="apellido" type="text" placeholder="Apellido" required>
+            <p>Email:</p>
+            <input v-model="telefono" type="email" placeholder="Email" required>
+            <p>Usuario:</p>
             <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
+            <p>Contraseña:</p>
             <input v-model="password" type="password" placeholder="Contraseña" required>
-            <button @click="Estacionamiento" type="submit">Iniciar Sesión</button>
-            <p><br>¿No estas registrado?</p><button @click="redirectToAbout">Registrese aqui</button>
+            <button type="submit">REGISTRAR</button>
         </form>
+        <p><br>¿Ya estas registrado?</p><button @click="redirectToAbout">Iniciar Sesion</button>
     </div>
 </template>
 <script>
 /* eslint-disable */
 import axios from 'axios';
+
 export default {
     data() {
         return {
-            username: '',
-            password: ''
+            first_name: '',
+            last_name: '',
+            password: '',
+            email:'',
+            username:''
         }
     },
     methods: {
-        loginUser() {
-            axios.post('http://localhost:8000/api/login/', {
-                username: this.username,
-                password: this.password
+        registerUser() {
+            axios.post('http://localhost:8000/register/', {
+                first_name: this.nombre,
+                last_name: this.apellido,
+                email:this.email,
+                password1: this.password,
+                password2: this.password,
+                username:this.username
             })
                 .then(response => {
                     console.log(response);
-                    this.$router.push('/Estacionamiento');
+                    const token = response.data.token;
+                    localStorage.setItem('token', token);
+                    console.log('Redirigiendo a /estacionamiento');
+                    this.$router.push('/estacionamiento');
                 })
                 .catch(error => {
+                    window.alert('Los datos ingresados son incorrectos, Intentelo nuevamente');
                     console.error(error);
                 });
         },
         redirectToAbout() {
-            this.$router.push('/RegistrarUsuario'); //Redirige a la pagina
-        },
-        Estacionamiento() {
-            this.$router.push('/');
+            this.$router.push('/inicio'); // Redirige a la página
         }
     }
 }
@@ -56,7 +73,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 150vh;
+    height: 80%;
 }
 
 .container {
@@ -75,7 +92,7 @@ h1 {
 }
 
 input {
-    background-color:rgb(158, 203, 212);
+    background-color: rgb(158, 203, 212);
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 10px;
@@ -100,6 +117,7 @@ button {
     margin-top: 10px;
     cursor: pointer;
 }
+
 @media only screen and (min-width: 320px) {
     .grid {
         grid-template-columns: repeat(1, 100%);
