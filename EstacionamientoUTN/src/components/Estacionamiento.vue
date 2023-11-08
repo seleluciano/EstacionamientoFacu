@@ -16,7 +16,7 @@
                 </ul>
             </div>
         </div>
-        <button onclick="salir" class="Salir">Salir</button>
+        <button @click="salir" class="Salir">Salir</button>
     </div>
 </template>
 <script>
