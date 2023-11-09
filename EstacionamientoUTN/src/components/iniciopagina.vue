@@ -1,7 +1,8 @@
 <template>
     <div>
-        <h1>¡¡BIENVENIDO!!</h1>
-        <h2>ESTACIONAMIENTO UTN</h2>
+        <img src="./Imagenes/Logo2.png">
+        <br><h1>¡BIENVENIDO!</h1>
+        <h2>Estacionamiento UTN </h2><br>
     </div>
 </template>
 <style>
@@ -17,7 +18,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80%;
+    height: 100%;
+}
+
+img {
+    width: 500px; /* Establece el ancho deseado */
+    height: 400px; /* Mantiene la proporción de aspecto */
 }
 
 .container {
@@ -30,9 +36,17 @@ body {
 }
 
 h1 {
-    font-family: 'Helvetica Neue', sans-serif;
-    color: #333;
+    font-family: 'Times New Roman', sans-serif;
+    color: #000000;
     margin-bottom: 20px;
+    font-size: 50px; /* Tamaño de fuente en píxeles */
+}
+
+h2 {
+    font-family: 'Times New Roman', sans-serif;
+    color: #000000;
+    margin-bottom: 20px;
+    font-size: 30px; /* Tamaño de fuente en píxeles */
 }
 
 input {

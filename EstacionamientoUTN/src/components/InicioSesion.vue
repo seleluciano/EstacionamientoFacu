@@ -71,9 +71,17 @@ body {
 }
 
 h1 {
-    font-family: 'Helvetica Neue', sans-serif;
-    color: #333;
+    font-family: 'Times New Roman', sans-serif;
+    color: #000000;
     margin-bottom: 20px;
+    font-size: 50px; /* Tamaño de fuente en píxeles */
+}
+
+h2 {
+    font-family: 'Times New Roman', sans-serif;
+    color: #000000;
+    margin-bottom: 20px;
+    font-size: 30px; /* Tamaño de fuente en píxeles */
 }
 
 input {
@@ -109,15 +117,12 @@ button {
         grid-template-rows: repeat(5, 20%);
     }
 }
-
-
 @media only screen and (min-width: 480px) {
     .grid {
         grid-template-columns: repeat(2, 50%);
         grid-template-rows: repeat(3, 33%);
     }
 }
-
 @media only screen and (min-width: 768px) {
     .grid {
         grid-template-columns: repeat(3, 34%);
