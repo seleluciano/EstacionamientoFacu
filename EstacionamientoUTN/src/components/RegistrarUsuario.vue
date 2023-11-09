@@ -12,7 +12,10 @@
             <p>Usuario:</p>
             <input v-model="username" type="text" placeholder="Nombre de Usuario" required>
             <p>Contraseña:</p>
-            <input v-model="password" type="password" placeholder="Contraseña" required>
+            <input v-model="password1" type="password" placeholder="Contraseña" required>
+            <p>Vuelva a ingresar la contraseña:</p>
+            <input v-model="password2" type="password" placeholder="Contraseña" required>
+            <p>La contraseña debe tener al menos 8 caracteres con 1 mayuscula,1 minuscula y 1 número</p>
             <button type="submit">REGISTRAR</button>
         </form>
         <p><br>¿Ya estas registrado?</p><button @click="redirectToAbout">Iniciar Sesion</button>
@@ -27,35 +30,43 @@ export default {
         return {
             first_name: '',
             last_name: '',
-            password: '',
-            email:'',
-            username:''
+            password1: '',
+            password2: '',
+            email: '',
+            username: ''
         }
     },
     methods: {
         registerUser() {
+            if (!this.nombre || !this.apellido || !this.email || !this.username || !this.password1 || !this.password2) {
+                window.alert('Por favor, complete todos los campos.');
+                return;
+            }
+            if (this.password1 !== this.password2) {
+                window.alert('Las contraseñas no coinciden. Vuelva a intentarlo.');
+                return;
+            }
             axios.post('http://localhost:8000/register/', {
                 first_name: this.nombre,
                 last_name: this.apellido,
-                email:this.email,
-                password1: this.password,
-                password2: this.password,
-                username:this.username
+                email: this.email,
+                password1: this.password1,
+                password2: this.password2,
+                username: this.username
             })
                 .then(response => {
                     console.log(response);
                     const token = response.data.token;
                     localStorage.setItem('token', token);
-                    console.log('Redirigiendo a /estacionamiento');
                     this.$router.push('/estacionamiento');
                 })
                 .catch(error => {
-                    window.alert('Los datos ingresados son incorrectos, Intentelo nuevamente');
+                    window.alert('Hubo un problema con el registro. Intentelo nuevamente.');
                     console.error(error);
                 });
         },
         redirectToAbout() {
-            this.$router.push('/inicio'); // Redirige a la página
+            this.$router.push('/inicio');
         }
     }
 }

@@ -4,13 +4,13 @@
 #include <WiFiUdp.h>
 
 int OUT = 2;  // Pin 2 de Arduino conectado a la salida del sensor
-int D = 0, O = 0,ID=1;
-bool guardarestado, estadoanterior = false; 
+int D = 0, O = 0, ID = 1;
+bool guardarestado, estadoanterior = false;
 
-//UTN #define WIFI_SSID "Utn_Libre Max"  // Nombre de la red a conectarse
-//UTN #define WIFI_PASSWORD ""           // Contraseña de la red
-#define WIFI_SSID "Personal-E78"  
-#define WIFI_PASSWORD "COE2953E78"           
+#define WIFI_SSID "Utn_Libre Max"  // Nombre de la red a conectarse
+#define WIFI_PASSWORD ""           // Contraseña de la red
+//CASA #define WIFI_SSID "Personal-E78"
+//#define WIFI_PASSWORD "COE2953E78"
 void conectarWiFi() {
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Conectando a Wi-Fi");
@@ -53,7 +53,7 @@ void loop() {
 
   if (estadoanterior != guardarestado) {
     estadoanterior = guardarestado;
-    enviarEstado(ID,guardarestado); //Envia el estado a django para modificarlo
+    enviarEstado(ID, guardarestado);  //Envia el estado a django para modificarlo
   }
 }
 
@@ -64,13 +64,11 @@ void enviarEstado(int sensor_id, bool estado) {
   url += "?id=" + String(sensor_id) + "&estado=" + String(estado ? "1" : "0");
 
   if (client.connect("localhost", 8000)) {
-    client.print(String("GET ") + url + " HTTP/1.1\r\n" +
-                 "Host: localhost\r\n" +
-                 "Connection: close\r\n\r\n");
+    client.print(String("GET ") + url + " HTTP/1.1\r\n" + "Host: localhost\r\n" + "Connection: close\r\n\r\n");
 
-    while(client.connected() && !client.available()) delay(1);
+    while (client.connected() && !client.available()) delay(1);
 
-    while(client.connected() || client.available()) {
+    while (client.connected() || client.available()) {
       char c = client.read();
       Serial.write(c);
     }
