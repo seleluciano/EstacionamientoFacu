@@ -68,9 +68,17 @@ body {
 }
 
 h1 {
-    font-family: 'Helvetica Neue', sans-serif;
-    color: #333;
+    font-family: 'Times New Roman', sans-serif;
+    color: #000000;
     margin-bottom: 20px;
+    font-size: 50px; /* Tamaño de fuente en píxeles */
+}
+
+h2 {
+    font-family: 'Times New Roman', sans-serif;
+    color: #000000;
+    margin-bottom: 20px;
+    font-size: 30px; /* Tamaño de fuente en píxeles */
 }
 
 input {
@@ -143,9 +151,9 @@ li {
 }
 
 .Salir {
-    color: black;
+    color: rgb(255, 255, 255);
     font-family: 'Helvetica Neue', sans-serif;
-    background-color: red;
+    background-color: rgb(0, 0, 0);
     border: none;
     border-radius: 4px;
     padding: 12px 20px;

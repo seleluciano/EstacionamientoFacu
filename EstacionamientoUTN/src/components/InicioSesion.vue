@@ -71,9 +71,17 @@ body {
 }
 
 h1 {
-    font-family: 'Helvetica Neue', sans-serif;
-    color: #333;
+    font-family: 'Times New Roman', sans-serif;
+    color: #000000;
     margin-bottom: 20px;
+    font-size: 50px; /* Tamaño de fuente en píxeles */
+}
+
+h2 {
+    font-family: 'Times New Roman', sans-serif;
+    color: #000000;
+    margin-bottom: 20px;
+    font-size: 30px; /* Tamaño de fuente en píxeles */
 }
 
 input {
