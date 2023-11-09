@@ -15,7 +15,7 @@
             <input v-model="password1" type="password" placeholder="Contraseña" required>
             <p>Vuelva a ingresar la contraseña:</p>
             <input v-model="password2" type="password" placeholder="Contraseña" required>
-            <p>La contraseña debe tener al menos 8 caracteres con 1 mayuscula,1 minuscula y 1 número</p>
+            <p>La contraseña debe tener al menos 8 caracteres con 1 mayuscula,1 minuscula, 1 numero y no debe contener datos personales</p>
             <button type="submit">REGISTRAR</button>
         </form>
         <p><br>¿Ya estas registrado?</p><button @click="redirectToAbout">Iniciar Sesion</button>
