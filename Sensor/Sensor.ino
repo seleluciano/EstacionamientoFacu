@@ -3,41 +3,45 @@
 #include <WiFiServer.h>
 #include <WiFiUdp.h>
 
-int OUT = 2;  // Pin 2 de Arduino conectado a la salida del sensor
-int D = 0, O = 0, ID = 1;
+int sensor_Pin = 0, LED_Pin = 2;  // Pin 2 de Arduino conectado a la salida del sensor
+int D = 0, O = 0, ID = 6;
 bool guardarestado, estadoanterior = false;
 
-#define WIFI_SSID "Utn_Libre Max"  // Nombre de la red a conectarse
-#define WIFI_PASSWORD ""           // Contraseña de la red
-//CASA #define WIFI_SSID "Personal-E78"
+#define WIFI_SSID "sele"  // Nombre de la red a conectarse
+#define WIFI_PASSWORD "aqaf1682"           // Contraseña de la red
+//#define WIFI_SSID "Personal-E78"
 //#define WIFI_PASSWORD "COE2953E78"
 void conectarWiFi() {
+  delay(1000);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("Conectando a Wi-Fi");
   while (WiFi.status() != WL_CONNECTED) {
-    Serial.print(".");
+    Serial.println("Conectando...");
     delay(300);
   }
   Serial.println();
-  Serial.print("Conectado con IP: ");
+  Serial.println("Conexion exitosa");
   Serial.println(WiFi.localIP());
   Serial.println();
 }
 
 void setup() {
-  Serial.begin(9600);
-  pinMode(OUT, INPUT);
+  Serial.begin(115200);
+  pinMode(sensor_Pin, INPUT);
+  pinMode(LED_Pin, OUTPUT);
   conectarWiFi();
 }
 
 void loop() {
   while (D < 5 && O < 5) {
-    if (digitalRead(OUT) == 1) {
+    if (digitalRead(sensor_Pin) == 1) {
       O = 0;
       D++;
+      digitalWrite(LED_Pin,LOW);
     } else {
       D = 0;
       O++;
+      digitalWrite(LED_Pin,HIGH);
     }
     delay(500);
   }
@@ -53,18 +57,26 @@ void loop() {
 
   if (estadoanterior != guardarestado) {
     estadoanterior = guardarestado;
-    enviarEstado(ID, guardarestado);  //Envia el estado a django para modificarlo
+    enviarEstado(guardarestado);  //Envia el estado a django para modificarlo
   }
 }
 
-void enviarEstado(int sensor_id, bool estado) {
+void enviarEstado(bool estado) {
   WiFiClient client;
 
-  String url = "http://localhost:8000/actualizar_estado/";
-  url += "?id=" + String(sensor_id) + "&estado=" + String(estado ? "1" : "0");
+  String url = "/actualizar_estado/";
 
-  if (client.connect("localhost", 8000)) {
-    client.print(String("GET ") + url + " HTTP/1.1\r\n" + "Host: localhost\r\n" + "Connection: close\r\n\r\n");
+  // Construye la cadena de datos para el cuerpo del POST
+  String postData = "id=" + String(ID) + "&estado=" + String(estado ? "1" : "0");
+
+  if (client.connect("172.29.82.119", 8000)) {
+    // Envía la solicitud HTTP POST
+    client.println("POST " + url + " HTTP/1.1");
+    client.println("Host: 172.29.82.119");
+    client.println("Content-Type: application/x-www-form-urlencoded");
+    client.println("Content-Length: " + String(postData.length()));
+    client.println();
+    client.println(postData);
 
     while (client.connected() && !client.available()) delay(1);
 
@@ -77,3 +89,4 @@ void enviarEstado(int sensor_id, bool estado) {
     Serial.println("Error en la conexión");
   }
 }
+

@@ -4,50 +4,58 @@
         <div class="columns">
             <div class="column">
                 <h2>NUMERO</h2>
-                <ul v-for="Sensor in sensores" :key="Sensor.id" class="ID">
-                    <li>{{ Sensor.id }}</li>
+                <ul v-for="sensor in sensores" :key="sensor.id" class="ID">
+                    <li>{{ sensor.id }}</li>
                 </ul>
             </div>
             <div class="column">
                 <h2>ESTADO</h2>
-                <ul v-for="Sensor in sensores" :key="Sensor.id">
-                    <button v-if="Sensor.estado == true" class="Ocupado">Ocupado</button>
-                    <button v-if="Sensor.estado == false" class="Desocupado">Desocupado</button>
+                <ul v-for="sensor in sensores" :key="sensor.id">
+                    <button :class="{ 'Ocupado': sensor.estado, 'Desocupado': !sensor.estado }">
+                        {{ sensor.estado ? 'Ocupado' : 'Desocupado' }}
+                    </button>
                 </ul>
             </div>
         </div>
         <button @click="salir" class="Salir">Salir</button>
     </div>
 </template>
+  
 <script>
 /* eslint-disable */
-import axios from 'axios'
-
+import axios from 'axios';
 export default {
     name: 'APITest',
-    data: function () {
+    data() {
         return {
             sensores: [],
-            estado: ''
-        }
+        };
     },
     mounted() {
-        axios.get('http://localhost:8000/sensores/')
-            .then(response => {
-                this.sensores = response.data;
-            })
-            .catch(error => {
-                window.alert('Error al cargar los sensores. Por favor, inténtalo de nuevo más tarde.');
-                console.error(error);
-            })
+        // Llamar a la función para cargar sensores
+        this.cargarSensores();
+
+        // Configurar un intervalo para cargar sensores cada 1 segundo
+        setInterval(this.cargarSensores, 1000);
     },
     methods: {
+        cargarSensores() {
+            axios.get('http://localhost:8000/sensores/')
+                .then(response => {
+                    this.sensores = response.data;
+                })
+                .catch(error => {
+                    console.error('Error al cargar los sensores:', error);
+                    window.alert('Error al cargar los sensores. Por favor, inténtalo de nuevo más tarde.');
+                });
+        },
         salir() {
             this.$router.push('/');
-        }
-    }
-}
+        },
+    },
+};
 </script>
+  
 <style>
 body {
     background-color: #71abec;
@@ -71,14 +79,16 @@ h1 {
     font-family: 'Times New Roman', sans-serif;
     color: #000000;
     margin-bottom: 20px;
-    font-size: 50px; /* Tamaño de fuente en píxeles */
+    font-size: 50px;
+    /* Tamaño de fuente en píxeles */
 }
 
 h2 {
     font-family: 'Times New Roman', sans-serif;
     color: #000000;
     margin-bottom: 20px;
-    font-size: 30px; /* Tamaño de fuente en píxeles */
+    font-size: 30px;
+    /* Tamaño de fuente en píxeles */
 }
 
 input {
@@ -170,15 +180,18 @@ li {
         grid-template-rows: repeat(5, 20%);
     }
 }
+
 @media only screen and (min-width: 480px) {
     .grid {
         grid-template-columns: repeat(2, 50%);
         grid-template-rows: repeat(3, 33%);
     }
 }
+
 @media only screen and (min-width: 768px) {
     .grid {
         grid-template-columns: repeat(3, 34%);
         grid-template-rows: repeat(2, 50%);
     }
-}</style>
+}
+</style>

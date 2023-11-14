@@ -4,12 +4,10 @@ from .models import Sensor
 from .serializers import SensorSerializer,UserSerializer
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token  # Agregada importación para Token
 from rest_framework.decorators import api_view
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
 
 def main(request):
     return render(request, 'vue_templates/main.html')  
@@ -42,19 +40,27 @@ def login_user(request):
             return JsonResponse({'token': str(token)})  # Devolver el token al cliente
     return JsonResponse({'error': 'Credenciales inválidas'}, status=400)
 
-@csrf_exempt
+@api_view(['POST'])
 def actualizar_estado(request):
-    if request.method == 'GET':
-        estado = request.GET.get('estado', None)
-        sensor_id = request.GET.get('id', None)
-
-        if estado is not None and sensor_id is not None:
-            Sensor.objects.filter(id=sensor_id).update(estado=estado)
-            return JsonResponse({'mensaje': 'Estado actualizado correctamente'})
-        else:
-            return JsonResponse({'mensaje': 'Parámetro de estado o ID de sensor no proporcionado'}, status=400)
+    # Obtener los datos del request
+    estado = request.data.get('estado')
+    sensor_id = request.data.get('id')
+    if estado is not None and sensor_id is not None:
+            # Intentar convertir sensor_id a entero (si es necesario)
+            sensor_id = int(sensor_id)
+            # Intentar obtener el sensor con el id proporcionado
+            sensor = Sensor.objects.filter(id=sensor_id).first()
+            if sensor is not None:
+                # El sensor con el id proporcionado existe, actualizar el estado
+                sensor.estado = estado
+                sensor.save()
+                return JsonResponse({'mensaje': 'Estado actualizado correctamente'})
+            else:
+                # El sensor con el id proporcionado no existe, crear uno nuevo
+                nuevo_sensor = Sensor.objects.create(id=sensor_id, estado=estado)
+                return JsonResponse({'mensaje': f'Nuevo sensor creado con ID {nuevo_sensor.id}'})
     else:
-        return JsonResponse({'mensaje': 'Método no permitido'}, status=405)
+        return JsonResponse({'mensaje': 'Parámetro de estado o ID de sensor no proporcionado'}, status=400)
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
