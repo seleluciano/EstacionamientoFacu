@@ -20,7 +20,6 @@
         <button @click="salir" class="Salir">Salir</button>
     </div>
 </template>
-  
 <script>
 /* eslint-disable */
 import axios from 'axios';
@@ -36,7 +35,7 @@ export default {
         this.cargarSensores();
 
         // Configurar un intervalo para cargar sensores cada 1 segundo
-        setInterval(this.cargarSensores, 1000);
+        setInterval(this.cargarSensores, 4000);
     },
     methods: {
         cargarSensores() {
